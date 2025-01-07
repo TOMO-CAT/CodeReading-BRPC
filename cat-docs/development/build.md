@@ -35,7 +35,28 @@ make
 ./echo_client
 ```
 
-## Bazel 编译
+## [废弃] Bazel 编译
+
+> Bazel 本身编译比较麻烦，暂不考虑。
+
+安装 bazel:
+
+```bash
+# 使用 BAZEL 的 apt 代码库
+sudo apt install apt-transport-https curl gnupg -y
+curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor >bazel-archive-keyring.gpg
+sudo mv bazel-archive-keyring.gpg /usr/share/keyrings
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+
+# 安装和更新 BAZEL
+sudo apt update && sudo apt install bazel
+
+# 除了最新版本的 BAZEL 外, 也可以安装特定的旧版本 BAZEL
+# sudo apt install bazel 6.1.1
+
+# 查看安装的 BAZEL 版本
+bazel --version
+```
 
 ## CMake 编译
 
