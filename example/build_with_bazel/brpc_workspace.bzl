@@ -19,7 +19,6 @@
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-
 BAZEL_SKYLIB_VERSION = "1.1.1"  # 2021-09-27T17:33:49Z
 
 BAZEL_SKYLIB_SHA256 = "c6966ec828da198c5d9adbaa94c05e3a1c7f21bd012a0b29ba8ddbccb2c93b0d"
@@ -53,15 +52,12 @@ def brpc_workspace():
         urls = ["https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.19.1.tar.gz"],
     )
 
-
     http_archive(
         name = "com_github_google_leveldb",
         build_file = "//:leveldb.BUILD",
         strip_prefix = "leveldb-a53934a3ae1244679f812d998a4f16f2c7f309a6",
-        url = "https://github.com/google/leveldb/archive/a53934a3ae1244679f812d998a4f16f2c7f309a6.tar.gz"
+        url = "https://github.com/google/leveldb/archive/a53934a3ae1244679f812d998a4f16f2c7f309a6.tar.gz",
     )
-
-
 
     http_archive(
         name = "com_github_madler_zlib",  # 2017-01-15T17:57:23Z
@@ -89,6 +85,5 @@ def brpc_workspace():
     http_archive(
         name = "apache_brpc",
         strip_prefix = "brpc-1.3.0",
-        url = "https://github.com/apache/brpc/archive/refs/tags/1.3.0.tar.gz"
+        url = "https://github.com/apache/brpc/archive/refs/tags/1.3.0.tar.gz",
     )
-
