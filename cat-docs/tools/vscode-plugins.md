@@ -22,3 +22,11 @@ $ sudo chmod +x /usr/bin/buildifier
 
 * markdownlint
 * CodeGeeX
+* CMake
+* CMake Tools
+* cmake-format
+
+```bash
+# 安装 cmake (3.22.1)
+sudo apt install cmake
+```
