@@ -27,6 +27,7 @@ $ sudo chmod +x /usr/bin/buildifier
 * cmake-format
 * vscode-lua-format
 * Code Spell Checker
+* Lua
 
 ```bash
 # 安装 cmake (3.22.1)
