@@ -1,0 +1,26 @@
+{
+    "cSpell.words": [
+        "asan",
+        "brpc",
+        "buildir",
+        "BUTIL",
+        "CPACK",
+        "DNDEBUG",
+        "errno",
+        "gcno",
+        "glog",
+        "leveldb",
+        "modp",
+        "rdma",
+        "recordio",
+        "RPATH",
+        "sprintf",
+        "stringprintf"
+    ],
+    "cSpell.enabledFileTypes": {
+        "markdown": false,
+        "json": false,
+        "jsonc": false
+    },
+    "cSpell.allowCompoundWords": true,
+}

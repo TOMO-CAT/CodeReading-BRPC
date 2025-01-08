@@ -84,3 +84,19 @@ cmake -B build && cmake --build build -j4
 ./echo_server &
 ./echo_client
 ```
+
+## XMake
+
+依赖
+
+```bash
+sudo apt install ccache -y
+```
+
+安装：
+
+```bash
+git clone git@github.com:TOMO-CAT/xmake.git
+cd xmake
+bash scripts/install.sh --runtime=luajit
+```
