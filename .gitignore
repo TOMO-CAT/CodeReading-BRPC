@@ -1,1 +1,16 @@
+# cmake
 build/
+
+# xmake
+xmake_build/
+.xmake/
+
+# clangd
+.cache/
+compile_commands.json
+
+# coverage
+/coverage_reports
+/*.gcno
+/coverage
+/*.info
