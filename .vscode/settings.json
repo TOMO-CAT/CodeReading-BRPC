@@ -29,6 +29,7 @@
         "mcpack",
         "modp",
         "msse",
+        "noparent",
         "nshead",
         "offsetof",
         "pbrpc",
