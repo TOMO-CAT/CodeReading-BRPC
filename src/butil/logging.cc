@@ -867,7 +867,7 @@ inline void DestroyLogStream(LogStream* stream) {
 #endif  // __GNUC__
 
 class DefaultLogSink : public LogSink {
-public:
+ public:
     static DefaultLogSink* GetInstance() {
         return Singleton<DefaultLogSink,
                          LeakySingletonTraits<DefaultLogSink> >::get();
@@ -883,7 +883,7 @@ public:
         PrintLog(os, severity, file, line, content);
         os << '\n';
         std::string log = os.str();
-        
+
         if ((logging_destination & LOG_TO_SYSTEM_DEBUG_LOG) != 0) {
             fwrite(log.data(), log.size(), 1, stderr);
             fflush(stderr);
@@ -923,7 +923,7 @@ public:
         }
         return true;
     }
-private:
+ private:
     DefaultLogSink() {}
     ~DefaultLogSink() {}
 friend struct DefaultSingletonTraits<DefaultLogSink>;
@@ -1231,20 +1231,20 @@ struct VLogSite {
 
     const std::string& module() const { return _module; }
     const std::string& full_module() const { return _full_module; }
-    
-private:
+
+ private:
     // Next site in the list. NULL means no next.
     butil::subtle::AtomicWord _next;
 
     // --vmodule > --v
     int _v;
-    
+
     // vlog is on iff _v >= _required_v
     int _required_v;
 
     // line nubmer of the vlog.
     int _line_no;
-    
+
     // Lowered, dirname & extname removed.
     std::string _module;
     // Lowered, extname removed. Empty when it equals to _module.
@@ -1293,21 +1293,21 @@ struct VModuleList {
     int init(const char* vmodules) {
         _exact_names.clear();
         _wild_names.clear();
-                           
+
         for (butil::StringSplitter sp(vmodules, ','); sp; ++sp) {
             int verbose_level = std::numeric_limits<int>::max();
             size_t off = 0;
             for (; off < sp.length() && sp.field()[off] != '='; ++off) {}
             if (off + 1 < sp.length()) {
                 verbose_level = strtol(sp.field() + off + 1, NULL, 10);
-                
+
             }
             const char* name_begin = sp.field();
             const char* name_end = sp.field() + off - 1;
             for (; isspace(*name_begin) && name_begin < sp.field() + off;
                  ++name_begin) {}
             for (; isspace(*name_end) && name_end >= sp.field(); --name_end) {}
-            
+
             if (name_begin > name_end) {  // only has spaces
                 continue;
             }
@@ -1370,17 +1370,17 @@ struct VModuleList {
         }
     }
 
-private:
+ private:
     std::map<std::string, int> _exact_names;
     std::vector<std::pair<std::string, int> > _wild_names;
 };
 
-// [ The idea ] 
+// [ The idea ]
 // Each callsite creates a VLogSite and inserts the site into singly-linked
 // vlog_site_list. To keep the critical area small, we use optimistic
 // locking : Assign local site w/o locking, then insert the site into
 // global list w/ locking, if local_module_list != global_vmodule_list or
-// local_default_v != FLAGS_v, repeat the assigment.
+// local_default_v != FLAGS_v, repeat the assignment.
 // An important property of vlog_site_list is that: It does not remove sites.
 // When we need to iterate the list, we don't have to hold the lock. What we
 // do is to get the head of the list inside lock and iterate the list w/o
@@ -1404,8 +1404,7 @@ static int vlog_site_list_add(VLogSite* site,
     return 0;
 }
 
-bool add_vlog_site(const int** v, const char* filename, int line_no,
-                   int required_v) {
+bool add_vlog_site(const int** v, const char* filename, int line_no, int required_v) {
     VLogSite* site = new (std::nothrow) VLogSite(filename, required_v, line_no);
     if (site == NULL) {
         return false;
@@ -1443,7 +1442,7 @@ void print_vlog_sites(VLogSitePrinter* printer) {
 static int on_reset_vmodule(const char* vmodule) {
     // resetting must be serialized.
     BAIDU_SCOPED_LOCK(reset_vmodule_and_v_mutex);
-    
+
     VModuleList* module_list = new (std::nothrow) VModuleList;
     if (NULL == module_list) {
         LOG(FATAL) << "Fail to new VModuleList";
@@ -1454,7 +1453,7 @@ static int on_reset_vmodule(const char* vmodule) {
         LOG(FATAL) << "Fail to init VModuleList";
         return -1;
     }
-    
+
     VModuleList* old_module_list = NULL;
     VLogSite* old_vlog_site_list = NULL;
     {
@@ -1470,7 +1469,7 @@ static int on_reset_vmodule(const char* vmodule) {
                 p->module(), p->full_module(), &p->v());
         }
     }
-    
+
     if (old_module_list) {
         //delay the deletion.
         if (NULL == deleting_vmodule_list) {
